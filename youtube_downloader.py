@@ -1,3 +1,18 @@
+"""
+    YouTube Downloader Organizer
+
+    This script downloads and organizes YouTube videos and audio files into category and uploader folders
+
+    Possible Future Functionality:
+        - Playlist support
+        - Download subtitles
+        - Download thumbnail and metadata
+        - Batch mode (list of urls)
+    Possible UX Improvements:
+        - Basic GUI
+        - Progress Bar (CLI or GUI or Both)
+"""
+
 
 from pathlib import Path
 import yt_dlp
