@@ -1,0 +1,17 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+*.env
+
+# VSCode workspace settings
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Ignore log/output files
+*.log
