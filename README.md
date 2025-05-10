@@ -12,7 +12,7 @@ Supports format selection (MP3 or MP4), folder categorization by content type an
 
 # How to Use
 1. Clone the repo:
-    git clone https://github.com/YOUR_USERNAME/youtube-downloader-organizer.git
+    git clone https://github.com/davidparksoftware/youtube-downloader-organizer.git
 2. Go into the repo:
     cd youtube-downloader-organizer
 3. Install dependencies:
