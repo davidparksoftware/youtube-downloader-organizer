@@ -59,6 +59,9 @@ def get_video_info(url):
 
 
 def download_youtube_video(url, format_choice, category):
+    """
+        This function downloads the actual youtube video if everything checks out
+    """
     info = get_video_info(url)
     if not info:
         return # Exit this function if video info cant be retrieved
@@ -137,6 +140,9 @@ def input_checking(type, input, choices):
 
 
 def main():
+    """
+        This function prompts the user for URL, format, and category and if they want to download another video
+    """
     while True:
         url = input("\nEnter the URL for the YouTube video: ").strip()
         
