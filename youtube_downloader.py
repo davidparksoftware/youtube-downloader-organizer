@@ -95,6 +95,14 @@ def download_youtube_video(url, format_choice, category):
     uploader = clean_filename(info.get('uploader', 'UnknownUploader'))
     title    = clean_filename(info.get('title', 'UnknownTitle'))
 
+    # Confirm with the user before continuing
+    print(f"Video Uploader: {uploader}")
+    print(f"Video Title: {title}")
+    download = input(f"Are you sure you want to download this file as a {format_choice.upper()} under the {category} Category? (Y/N): ").strip().lower()
+    if download != "y":
+        print("This file will not be downloaded")
+        return
+
     # Create/initialize the output directory
     target_dir = download_dir / category.capitalize() / uploader
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -118,18 +126,11 @@ def download_youtube_video(url, format_choice, category):
         ydl_format_options = mp4_format_options.copy()
     ydl_format_options['outtmpl'] = output_template
     
-    # Double check to see if the user wants to download the given video
-    print(f"Video Uploader: {uploader}")
-    print(f"Video Title: {title}")
-    download = input(f"Are you sure you want to download this file under: {target_dir} (Y/N): ").strip().lower()
-    if download != "y":
-        print("This file will not be downloaded")
-        return
-    else:
-        with yt_dlp.YoutubeDL(ydl_format_options) as ydl:
-            print(f"Downloading to {target_dir}...")
-            ydl.download([url])
-            print("Download complete")
+    # Download the video
+    with yt_dlp.YoutubeDL(ydl_format_options) as ydl:
+        print(f"Downloading to {target_dir}...")
+        ydl.download([url])
+        print("Download complete")
         
 
 def input_checking(type, input, choices):
