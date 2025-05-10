@@ -32,6 +32,31 @@ format_choices = {
     "2": "mp4"
 }
 
+# Set the different download configurations
+mp3_format_options = {
+    # Get the best audio stream
+    'format': 'bestaudio/best',
+    # Get the output directory
+    'outtmpl': None,    # This will be set dynamically
+    # Convert to MP3 using FFmpeg
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    # Show the download progress
+    'quiet': False
+}
+mp4_format_options = {
+    # Get the best video and audio separate or if not then together
+    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
+    # Get the output directory
+    'outtmpl': None,    # This will be set dynamically
+    # Show the download progress
+    'quiet': False
+}
+
+
 def clean_filename(name):
     """
         This function cleans up the filename by removing any forbidden characters
@@ -86,30 +111,12 @@ def download_youtube_video(url, format_choice, category):
                 print("This file will not be downloaded")
                 return
     
+    # Copy the format options so that the global dict isn't changed
     if format_choice == "mp3":
-        ydl_format_options = {
-            # Get the best audio stream
-            'format': 'bestaudio/best',
-            # Get the output directory from above
-            'outtmpl': output_template,
-            # Convert to MP3 using FFmpeg
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-            # Show the download progress
-            'quiet': False
-        }
+        ydl_format_options = mp3_format_options.copy()
     elif format_choice == "mp4":
-        ydl_format_options = {
-            # Get the best video and audio separate or if not then together
-            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
-            # Get the output directory from above
-            'outtmpl': output_template,
-            # Show the download progress
-            'quiet': False
-        }
+        ydl_format_options = mp4_format_options.copy()
+    ydl_format_options['outtmpl'] = output_template
     
     # Double check to see if the user wants to download the given video
     print(f"Video Uploader: {uploader}")
